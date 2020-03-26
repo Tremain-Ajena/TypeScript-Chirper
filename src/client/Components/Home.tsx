@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import Navigation from './Navigation';
+import {Link} from 'react-router-dom';
+import Admin from './Admin';
 // import Stationary from './Stationary';
 
 
 
-class App2 extends Component {
+class Home extends React.Component <HomeProps> {
     constructor(props) {
         super(props);
-        export interface Chirp {
-            id:number,
-            name:string,
-            message:string,
-            // images:string,
-            newMessageText:string,
-            newName:string
-        }
 
         this.state = {
             chirps: [
@@ -53,7 +47,7 @@ class App2 extends Component {
     handleClick() {
         const newChirp = {
             name: this.state.newName,
-            message: this.state.newMessageText:,
+            message: this.state.newMessageText,
             // chirpBody: this.state.newChirpBody
         };
         this.setState({ chirps: [...this.state.chirps, newChirp] });
@@ -64,7 +58,7 @@ class App2 extends Component {
             <React.Fragment>
                 <div style={{ backgroundColor: 'goldenrod' }}>
                     <h1>You've Been Chirped</h1>
-                    <Navigation />
+                    <Navigation />,
                     {/* <button type='button' className='btn btn-outline-warning'>Submit</button>
                 <div className="alert alert-success" role="alert">
                     A simple success alert—check it out!
@@ -97,15 +91,18 @@ class App2 extends Component {
                                 <div className="card mb-3 text-white bg-secondary" style={{ maxWidth: '540px' }}>
                                     <div className="row no-gutters">
                                         <div className="col-md-4">
-                                            <img src={this.state.images[2]} className="card-img" alt="Static Shock" />
+                                            <img src={this.state.images[2]} className="card-img" alt="Kablam" />
                                         </div>
-                                        <div className="col-md-8">
+                                        <div className="col-md-8 text-left">
                                             <div className="card-header">
                                                 <h5 className="card-title">{chirp.name}</h5>
                                             </div>
-                                            <div className="card-body">
+                                            <div className="card-body text-center">
                                                 <p className="card-text">{chirp.message}</p>
                                                 <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+                                                <button className="btn btn-warning">
+                                                <Link to= {'/details'}>Admin Options</Link>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -120,4 +117,24 @@ class App2 extends Component {
 
     }
 };
-export default App2
+
+// interface IChirp {
+//         id: string;
+//         name: string;
+//         message: string;
+//         images:string
+
+// }
+
+// interface NewChirpPost {
+//     newChirp: {
+//         id: string;
+//         name: string;
+//         message: string;
+//         images:string
+//     }
+// }
+
+interface HomeProps {}
+
+export default Home;
