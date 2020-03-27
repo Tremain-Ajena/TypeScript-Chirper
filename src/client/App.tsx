@@ -11,11 +11,12 @@ import Details from './Components/Details';
 
 // In this lab, down below I converted a class-based component into a functional component
 
-const App: React.SFC<IAppProps> = props => {
+const App: React.FC<AppProps> = () => {
 
 
 	return (
 		<BrowserRouter>
+			<Navigation />
 
 			<Switch>
 				<Route exact path="/" component={Home}>
@@ -24,16 +25,15 @@ const App: React.SFC<IAppProps> = props => {
 				{/* <Route exact path="/navigation/:id" component={Navigation}>
 						<Navigation />
 					</Route> */}
-				<Route exact path="/details" component={Details}>
+				<Route exact path="/details/:id" component={Details}>
 					<Details />
 				</Route>
-				<Route exact path="/admin" component={Admin}>
+				<Route exact path="/admin/:id" component={Admin}>
 					<Admin />
 				</Route>
 				<Route exact path="/compose" component={Compose}>
 					<Compose />
 				</Route>
-
 			</Switch>
 
 		</BrowserRouter>
@@ -41,7 +41,7 @@ const App: React.SFC<IAppProps> = props => {
 	);
 }
 
-export interface IAppProps { }
+export interface AppProps { }
 
 export interface IAppState {
 	name: string;

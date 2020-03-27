@@ -4,20 +4,28 @@ import ChirpStore from '../utilities/chirpstore';
 const router = Router();
 
 // GET /api/chirps
-router.get('/', (req, res) => {
+router.get('/', (request, response) => {
     const data = ChirpStore.GetChirps();
-    res.json(data);
+    const chirps = Object.keys(data).map(key => {
+        return {
+            id:key,
+            name:data[key].name,
+            message:data[key].message,
+        }
+    });
+    chirps.pop();
+    response.json(chirps);
 
     // res.json({msg: 'TEST ENDPOINT!'})
 });
 
 //GET /api/chirps/:chirpid
-router.get('chirpid', (request, response) => {
+router.get('/:chirpid', (request, response) => {
     const chirpid = request.params.chirpid;
     // the "const chirpid = request.params.chirpid;" prevents the networking code and backend code from being muddled together
     const chirp = ChirpStore.GetChirp(chirpid);
     // use the GetChirp() function in the line of code above instead of GetChirps() because GetChirp() actually grabs the chirps by ID.
-    response.json(chirp);
+    response.json({ id: chirpid, ...chirp});
 });
 
 // POST /api/chirps
